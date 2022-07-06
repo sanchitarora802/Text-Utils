@@ -24,6 +24,17 @@ export default function Formtext(props) {
     setText(newtext);
   }
 
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(text); 
+}
+
+const handleExtraSpaces = () => {
+    let newText = text.split(/[ ]+/);
+    setText(newText.join(" "));
+}
+
+
   return (
     <> 
      
@@ -35,15 +46,17 @@ export default function Formtext(props) {
       </div>
       <button className = "btn btn-outline-primary my-2 mx-2" onClick = {onUpFunction}> UpperCase</button>
       <button className = "btn btn-outline-primary my-2 mx-2 " onClick = {onLowFunction}> LowerCase</button>
-      <button className = "btn btn-outline-primary my-2 mx-2 " onClick = {onClearFunction}> Clear</button><br></br>
+      <button className = "btn btn-outline-primary my-2 mx-2 " onClick = {onClearFunction}> Clear</button>
+      <button className = "btn btn-outline-primary my-2 mx-2 " onClick = {handleCopy}> CopyText</button>
+      <button className = "btn btn-outline-primary my-2 mx-2 " onClick = {handleExtraSpaces}> RemoveExtraSpaces</button>
     </div>
 
     <div>
       {/* used to count the no of words and letters in a paragraph.*/}
       <h3 className = {`my-3 text-${props.mode===`light`?`dark`:`light`}`}>Text Summary </h3>
-      <p className = {`my-3 text-${props.mode===`light`?`dark`:`light`}`}> {text.split(' ').filter((element)=>{ return element.length!==0}).length} words and {text.length} letters.</p>
+      <p className = {`my-3 mx-2 text-${props.mode===`light`?`dark`:`light`}`}> {text.split(' ').filter((element)=>{ return element.length!==0}).length} words and {text.length} letters.</p>
       <h3 className = {`my-3 text-${props.mode===`light`?`dark`:`light`}`}> Result Preview</h3>
-        <p className = {`my-3 text-${props.mode===`light`?`dark`:`light`}`}>{text}</p> 
+        <p className = {`my-3 mx-2 text-${props.mode===`light`?`dark`:`light`}`}>{text}</p> 
     </div>
     </>
   );
